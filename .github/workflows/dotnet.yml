@@ -29,3 +29,12 @@ jobs:
     - name: Test
       run: dotnet test --no-build --verbosity normal
       working-directory: ./src
+    - name: Publish
+      run: dotnet publish -c Release -o website
+      working-directory: ./src
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@v3.1.2
+      with:
+        name: website
+        path: ./src/website/**
+        if-no-files-found: error
